@@ -1,0 +1,226 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:CompileBindings="False"
+             x:Class="SpravochnikPP.Pages.MainPage">
+    <Grid ColumnDefinitions="*,10*,*"
+          RowDefinitions="*,10*,*">
+        
+        <TabControl Grid.Column="0"
+                    Grid.Row="0"
+				TabStripPlacement="Left"
+				Grid.ColumnSpan="2"
+				Grid.RowSpan="3">
+	        <TabItem Header="Таблица">
+		        <Panel>
+			        <Grid RowDefinitions="*,10*,*">
+				        <StackPanel Grid.Row="0" 
+				                    Orientation="Horizontal"  Margin="10"
+				                    MaxWidth="740"
+				                    HorizontalAlignment="Center">
+						        <TextBlock HorizontalAlignment="Right" 
+							                Text="Название" Width="215"
+							                Margin="35 0 0 0"/>
+								<TextBlock Text="ГИ" 
+					                   TextAlignment="Center"
+					                  TextWrapping="Wrap" Width="100"
+					                  HorizontalAlignment="Center"/>
+						        <TextBlock HorizontalAlignment="Center" 
+						                   TextAlignment="Center"
+						                   Text="Калории" Width="100"/>
+						        <TextBlock HorizontalAlignment="Center" 
+						                   TextAlignment="Center"
+						                   Text="Белки" Width="100"/>
+						        <TextBlock HorizontalAlignment="Center" 
+						                   TextAlignment="Center"
+						                   Text="Жиры" Width="100"/>
+						        <TextBlock HorizontalAlignment="Center" 
+						                   TextAlignment="Center"
+						                   Text="Углеводы" Width="100"/>
+							</StackPanel>
+					        <ListBox Grid.Row="1" Margin="5"
+					                 Name="ListBox"
+					                 MaxWidth="740"
+					                 Background="White">
+						        <ListBox.ItemTemplate>
+						        <DataTemplate>
+							        <Border BorderThickness="2"
+							                        BorderBrush="{Binding Background}"
+							                        CornerRadius="15">
+								        <StackPanel Orientation="Horizontal">
+									        <Image Source="{Binding Image}"
+									               Width="30"
+									               Margin="5"/>
+									        <TextBlock Text="{Binding Title}"
+									                   FontWeight="Bold"
+									                   TextWrapping="Wrap"
+									                   VerticalAlignment="Center"
+									                   Width="200"/>
+									        <TextBlock Text="{Binding Glikindex}"
+									                   Width="100"
+									                   TextAlignment="Center"
+									                   VerticalAlignment="Center"/>
+									        <TextBlock Text="{Binding Cal}"
+									                   Width="100"
+									                   TextAlignment="Center"
+									                   VerticalAlignment="Center"/>
+									        <TextBlock Text="{Binding Proteins}"
+									                   Width="100"
+									                   TextAlignment="Center"
+									                   VerticalAlignment="Center"/>
+									        <TextBlock Text="{Binding Fats}"
+									                   Width="100"
+									                   TextAlignment="Center"
+									                   VerticalAlignment="Center"/>
+									        <TextBlock Text="{Binding Carbohydrates}"
+									                   Width="100"
+									                   TextAlignment="Center"
+									                   VerticalAlignment="Center"/>
+								        </StackPanel>
+							        </Border>
+						        </DataTemplate>
+					        </ListBox.ItemTemplate>
+				        </ListBox>
+				        
+				        <StackPanel Grid.Row="2" Orientation="Horizontal"
+				                    HorizontalAlignment="Center">
+				        <TextBox Name="SearchTextBox"
+				                 Watermark="Поиск"
+				                 Margin="5"
+				                 Width="250"
+				                 BorderBrush="#379F44"
+				                 BorderThickness="2"
+				                 KeyUp="SearchTextBox_OnKeyUp"
+				                 VerticalAlignment="Center"/>
+				        <ComboBox Name="FiltrComboBox"
+				                  Margin="5"
+				                  BorderBrush="#379F44"
+				                  BorderThickness="2"
+				                  GotFocus="FiltrComboBox_OnGotFocus"
+				                  VerticalAlignment="Center">
+				        </ComboBox>
+				        <ComboBox Name="SortComboBox"
+				                  Margin="5"
+				                  BorderBrush="#379F44"
+				                  BorderThickness="2"
+				                  GotFocus="SortComboBox_OnGotFocus"
+				                  VerticalAlignment="Center"
+				                  SelectedIndex="0">
+					        <ComboBoxItem Content="По умолчанию"/>
+					        <ComboBoxItem Content="По алфавиту (от А до Я)"/>
+					        <ComboBoxItem Content="По алфавиту (от Я до А)"/>
+					        <ComboBoxItem Content="По возрастанию ГИ"/>
+					        <ComboBoxItem Content="По убыванию ГИ"/>
+				        </ComboBox>
+				        <TextBlock Name="CountTextBlock"/>
+			        </StackPanel>
+			        </Grid>
+		        </Panel>
+	        </TabItem>
+	        <TabItem Header="Статьи">
+		        <Panel>
+			        <ScrollViewer>
+				        <StackPanel>
+					        <Expander Header="Гликемический индекс">
+						        <StackPanel  HorizontalAlignment="Center">
+							        <Image Source="../Files/GlikIndex.png"/>
+						        </StackPanel>
+					        </Expander>
+					        <Expander Header="Способы снижения ГИ">
+						        <StackPanel  HorizontalAlignment="Center">
+							        <Image Source="../Files/Snizenie.png"/>
+							        <Image Source="../Files/BezSoch.png"/>
+						        </StackPanel>
+					        </Expander>
+					        <Expander Header="Безопасные сочетания">
+						        <StackPanel  HorizontalAlignment="Center">
+							        <Image Source="../Files/InsulIndex.png"/>
+						        </StackPanel>
+					        </Expander>
+					        <Expander Header="Индекс массы тела (ИМТ)">
+						        <StackPanel  HorizontalAlignment="Center">
+							        <TextBlock x:Name="TextDocument"
+							                   TextWrapping="Wrap"/>
+						        </StackPanel>
+					        </Expander>
+				        </StackPanel>
+			        </ScrollViewer>
+		        </Panel>
+	        </TabItem>
+	        <TabItem Header="Рецепты">
+		        <Panel>
+				        <ScrollViewer>
+					        <StackPanel>
+						        <Expander Header="Тирамису без сырых яиц">
+							        <TextBlock  x:Name="DocxDocument" 
+							                    TextWrapping="Wrap" />
+						        </Expander>
+								<Expander Header="Куриные рулетики">
+									<StackPanel  HorizontalAlignment="Center">
+										<Image Source="../Files/whPExjDVtP42.jpg"/>
+									</StackPanel>
+									
+								</Expander>
+						        <Expander Header="Фитнес печенье">
+							        <StackPanel HorizontalAlignment="Center">
+								        <Image Source="../Files/2oPdp7R9q-Q2.jpg"/>
+							        </StackPanel>
+							        
+						        </Expander>
+						        <Expander Header="Гречнево-куриные котлеты">
+							        <StackPanel HorizontalAlignment="Center">
+								        <Image Source="../Files/Tb9GAwQXymo2.jpg"/>
+							        </StackPanel>
+							        
+						        </Expander>
+						        <Expander Header="Пирог с грибами и сыром">
+							        <StackPanel HorizontalAlignment="Center">
+								        <Image Source="../Files/sazLNrCKKWg2.jpg"/>
+							        </StackPanel>
+							        
+						        </Expander>
+						        <Expander Header="Сырный суп с брокколи">
+							        <StackPanel HorizontalAlignment="Center">
+								        <Image Source="../Files/Kft_JR1HVZQ2.jpg"/> 
+							        </StackPanel>
+						        </Expander>
+					        </StackPanel>
+				        </ScrollViewer>
+			        </Panel>
+	        </TabItem>
+	        <TabItem Header="Калькулятор ИМТ">
+		        <Panel>
+			        <Grid RowDefinitions="*,*">
+				        <StackPanel Grid.Row="0" VerticalAlignment="Center">
+					        <DockPanel HorizontalAlignment="Center"
+					                   Margin="5">
+						        <TextBlock Text="Рост:"
+						                   Width="50"/>
+						        <ComboBox Name="HeightComboBox"
+						                  GotFocus="HeightComboBox_OnGotFocus"/>
+					        </DockPanel> 
+					        <DockPanel HorizontalAlignment="Center"
+					                   Margin="5">
+						        <TextBlock Text="Вес:"
+						                   Width="50"/>
+								<ComboBox Name="WeightComboBox"
+								          GotFocus="WeightComboBox_OnGotFocus"/>
+					        </DockPanel>
+					        <TextBlock Name="ResultTextBlock"/>
+					        <Button Name="KalculButton"
+					                Content="Рассчитать"
+					                HorizontalAlignment="Center"
+					                Margin="5"
+					                Background="#D6FFB0"
+					                Click="KalculButton_OnClick"/>
+				        </StackPanel>
+				        <Image Grid.Row="1"
+				               VerticalAlignment="Bottom" Source="../Files/IMT.png"/>
+			        </Grid>
+		        </Panel>
+	        </TabItem>
+	    </TabControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="SpravochnikPP/App.axaml" value="SpravochnikPP/SpravochnikPP.csproj" />
+        <entry key="SpravochnikPP/MainWindow.axaml" value="SpravochnikPP/SpravochnikPP.csproj" />
+        <entry key="SpravochnikPP/Pages/MainPage.axaml" value="SpravochnikPP/SpravochnikPP.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

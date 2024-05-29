@@ -1,0 +1,55 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SpravochnikPP.MainWindow"
+        Title="Справочник ПП"
+        FontFamily="Palatino Linotype"
+        Icon="Images/icon_result.ico">
+        <Window.Styles>
+                <Style Selector="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="17"/>
+                        <Setter Property="FontFamily" Value="Palatino Linotype"/>
+                </Style>
+                <Style Selector="TabControl WrapPanel">
+                        <Setter Property="Background" Value="#D6FFB0"/>
+                </Style>
+
+                <Style Selector="TabItem">
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="Height" Value="34"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Foreground" Value="#379F44"/>
+                        <Setter Property="Margin" Value="0 0 0 0"/>
+                        <Setter Property="Padding" Value="10 0"/>
+                </Style>
+               
+
+                <Style Selector="TabItem:focus">
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Margin" Value="0 0 0 0"/>
+                        <Setter Property="Padding" Value="10 0"/>
+                </Style>
+               
+                <Style Selector="TabItem:selected">
+                        <Setter Property="Foreground" Value="#379F44"/>
+                        <Setter Property="Margin" Value="0 0 0 0"/>
+                        <Setter Property="Padding" Value="10 0"/>
+                        
+                </Style>
+                
+                
+                <Style Selector="Expander">
+                        <Setter Property="Background" Value="#D6FFB0"/>
+                        <Setter Property="Margin" Value="5"/>
+                        
+                </Style>
+                
+                
+        </Window.Styles>
+        <ContentControl x:Name="contentControl" />
+        
+</Window>
