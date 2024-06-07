@@ -507,9 +507,18 @@
       <AvaloniaResource Include="Files\Snizenie.png" />
       <None Remove="Files\IMT.png" />
       <AvaloniaResource Include="Files\IMT.png" />
+      <None Remove="Images\Plus.png" />
+      <AvaloniaResource Include="Images\Plus.png" />
     </ItemGroup>
 
     <ItemGroup>
       <Reference Include="System.Windows.Forms" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Pages\Autorization.axaml.cs">
+        <DependentUpon>Autorization.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 </Project>

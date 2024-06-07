@@ -1,0 +1,29 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SpravochnikPP.Pages.Registration">
+    <Grid RowDefinitions="*,*,*"
+          ColumnDefinitions="*,*,*">
+        <StackPanel Grid.Column="1"
+                    Grid.Row="1">
+            <TextBox Watermark="ФАМИЛИЯ" Name="FirstNameTextBox"/>
+            <TextBox Watermark="ИМЯ" Name="NameTextBox"/>
+            <TextBox Watermark="ОТЧЕСТВО" Name="PatronomicTextBox"/>
+            <TextBox Watermark="ЛОГИН" Name="LoginTextBox"/>
+            <TextBox Watermark="ПАРОЛЬ" Name="PasswordTextBox"/>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Content="Регистрация"
+                        Name="AddButton"
+                        Click="AddButton_OnClick"/>
+                <Button Content="Назад"
+                        Name="ExitButton"
+                        Click="ExitButton_OnClick"/>
+            </StackPanel>
+            <TextBlock Name="Errors"
+                       TextWrapping="Wrap"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

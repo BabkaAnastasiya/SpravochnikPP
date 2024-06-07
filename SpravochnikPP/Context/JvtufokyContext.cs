@@ -28,7 +28,13 @@ public partial class JvtufokyContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
+    public virtual DbSet<Favorite> Favorites { get; set; }
+
     public virtual DbSet<Kbzu> Kbzus { get; set; }
+
+    public virtual DbSet<Role> Roles { get; set; }
+
+    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -67,6 +73,25 @@ public partial class JvtufokyContext : DbContext
             entity.Property(e => e.Title).HasColumnName("title");
         });
 
+        modelBuilder.Entity<Favorite>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("Favorites_pkey");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Productid).HasColumnName("productid");
+            entity.Property(e => e.Userid).HasColumnName("userid");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.Favorites)
+                .HasForeignKey(d => d.Productid)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Favorites_productid_fkey");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Favorites)
+                .HasForeignKey(d => d.Userid)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Favorites_userid_fkey");
+        });
+
         modelBuilder.Entity<Kbzu>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("KBZU_pkey");
@@ -86,6 +111,32 @@ public partial class JvtufokyContext : DbContext
             entity.HasOne(d => d.Categories).WithMany(p => p.Kbzus)
                 .HasForeignKey(d => d.Categoriesid)
                 .HasConstraintName("KBZU_categoriesid_fkey");
+        });
+
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("Roles_pkey");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Title).HasColumnName("title");
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("Users_pkey");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Firstname).HasColumnName("firstname");
+            entity.Property(e => e.Lastname).HasColumnName("lastname");
+            entity.Property(e => e.Login).HasColumnName("login");
+            entity.Property(e => e.Passwords).HasColumnName("passwords");
+            entity.Property(e => e.Patronomic).HasColumnName("patronomic");
+            entity.Property(e => e.Roleid).HasColumnName("roleid");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.Users)
+                .HasForeignKey(d => d.Roleid)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Users_roleid_fkey");
         });
 
         OnModelCreatingPartial(modelBuilder);

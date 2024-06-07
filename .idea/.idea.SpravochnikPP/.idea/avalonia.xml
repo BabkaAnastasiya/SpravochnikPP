@@ -3,9 +3,16 @@
   <component name="AvaloniaProject">
     <option name="projectPerEditor">
       <map>
+        <entry key="SpravochnikPP/AddProduct.axaml" value="SpravochnikPP/SpravochnikPP.csproj" />
         <entry key="SpravochnikPP/App.axaml" value="SpravochnikPP/SpravochnikPP.csproj" />
+        <entry key="SpravochnikPP/Autorization.axaml" value="SpravochnikPP/SpravochnikPP.csproj" />
         <entry key="SpravochnikPP/MainWindow.axaml" value="SpravochnikPP/SpravochnikPP.csproj" />
+        <entry key="SpravochnikPP/Pages/AddProduct.axaml" value="SpravochnikPP/SpravochnikPP.csproj" />
+        <entry key="SpravochnikPP/Pages/Autorization.axaml" value="SpravochnikPP/SpravochnikPP.csproj" />
         <entry key="SpravochnikPP/Pages/MainPage.axaml" value="SpravochnikPP/SpravochnikPP.csproj" />
+        <entry key="SpravochnikPP/Pages/Pacion.axaml" value="SpravochnikPP/SpravochnikPP.csproj" />
+        <entry key="SpravochnikPP/Pages/Racion.axaml" value="SpravochnikPP/SpravochnikPP.csproj" />
+        <entry key="SpravochnikPP/Pages/Registration.axaml" value="SpravochnikPP/SpravochnikPP.csproj" />
       </map>
     </option>
   </component>

@@ -14,6 +14,6 @@ public partial class MainWindow : Window
     }
     private void ShowMainPage()
     {
-        contentControl.Content = new MainPage();
+        contentControl.Content = new Autorization();
     }
 }

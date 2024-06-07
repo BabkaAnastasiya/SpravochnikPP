@@ -2,27 +2,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1100" d:DesignHeight="700"
              x:CompileBindings="False"
              x:Class="SpravochnikPP.Pages.MainPage">
-    <Grid ColumnDefinitions="*,10*,*"
-          RowDefinitions="*,10*,*">
-        
-        <TabControl Grid.Column="0"
-                    Grid.Row="0"
-				TabStripPlacement="Left"
-				Grid.ColumnSpan="2"
-				Grid.RowSpan="3">
+    <Grid ColumnDefinitions="*,8*,*"
+          RowDefinitions="*,8*,*">
+	    <TabControl Grid.Column="0"
+	                Grid.Row="0"
+	                TabStripPlacement="Left"
+	                Grid.ColumnSpan="2"
+	                Grid.RowSpan="3">
 	        <TabItem Header="Таблица">
 		        <Panel>
-			        <Grid RowDefinitions="*,10*,*">
+			        <Grid RowDefinitions="*,8*,*">
 				        <StackPanel Grid.Row="0" 
 				                    Orientation="Horizontal"  Margin="10"
-				                    MaxWidth="740"
 				                    HorizontalAlignment="Center">
 						        <TextBlock HorizontalAlignment="Right" 
 							                Text="Название" Width="215"
-							                Margin="35 0 0 0"/>
+							                Margin="50 0 0 0"/>
 								<TextBlock Text="ГИ" 
 					                   TextAlignment="Center"
 					                  TextWrapping="Wrap" Width="100"
@@ -42,7 +40,9 @@
 							</StackPanel>
 					        <ListBox Grid.Row="1" Margin="5"
 					                 Name="ListBox"
-					                 MaxWidth="740"
+					                 MinWidth="790"
+					                 MaxWidth="790"
+					                 Tag="{Binding Id}"
 					                 Background="White">
 						        <ListBox.ItemTemplate>
 						        <DataTemplate>
@@ -53,6 +53,13 @@
 									        <Image Source="{Binding Image}"
 									               Width="30"
 									               Margin="5"/>
+									        <Button Background="White"
+									                BorderBrush="#379F44"
+									                Tag="{Binding Id}"
+									                Click="AddRacionButton_OnClick"
+									                Margin="0 0 5 0"
+									                Content="+">
+									        </Button>
 									        <TextBlock Text="{Binding Title}"
 									                   FontWeight="Bold"
 									                   TextWrapping="Wrap"
@@ -83,39 +90,44 @@
 						        </DataTemplate>
 					        </ListBox.ItemTemplate>
 				        </ListBox>
-				        
 				        <StackPanel Grid.Row="2" Orientation="Horizontal"
 				                    HorizontalAlignment="Center">
-				        <TextBox Name="SearchTextBox"
-				                 Watermark="Поиск"
-				                 Margin="5"
-				                 Width="250"
-				                 BorderBrush="#379F44"
-				                 BorderThickness="2"
-				                 KeyUp="SearchTextBox_OnKeyUp"
-				                 VerticalAlignment="Center"/>
-				        <ComboBox Name="FiltrComboBox"
+					        <Button  
+						        Content="Добавить продукт"
+						        Name="AddButton"
+						        FontSize="15"
+						        Click="AddButton_OnClick"/>
+					        <TextBox Name="SearchTextBox"
+					                 Watermark="Поиск"
+					                 Margin="5"
+					                 Width="250"
+					                 BorderBrush="#379F44"
+					                 BorderThickness="2"
+					                 KeyUp="SearchTextBox_OnKeyUp"
+					                 VerticalAlignment="Center"/>
+							<ComboBox Name="FiltrComboBox"
 				                  Margin="5"
 				                  BorderBrush="#379F44"
 				                  BorderThickness="2"
 				                  GotFocus="FiltrComboBox_OnGotFocus"
 				                  VerticalAlignment="Center">
-				        </ComboBox>
-				        <ComboBox Name="SortComboBox"
-				                  Margin="5"
-				                  BorderBrush="#379F44"
-				                  BorderThickness="2"
-				                  GotFocus="SortComboBox_OnGotFocus"
-				                  VerticalAlignment="Center"
-				                  SelectedIndex="0">
-					        <ComboBoxItem Content="По умолчанию"/>
-					        <ComboBoxItem Content="По алфавиту (от А до Я)"/>
-					        <ComboBoxItem Content="По алфавиту (от Я до А)"/>
-					        <ComboBoxItem Content="По возрастанию ГИ"/>
-					        <ComboBoxItem Content="По убыванию ГИ"/>
-				        </ComboBox>
-				        <TextBlock Name="CountTextBlock"/>
-			        </StackPanel>
+							</ComboBox>
+					        <ComboBox Name="SortComboBox"
+					                  Margin="5"
+					                  BorderBrush="#379F44"
+					                  BorderThickness="2"
+					                  GotFocus="SortComboBox_OnGotFocus"
+					                  VerticalAlignment="Center"
+					                  SelectedIndex="0">
+								<ComboBoxItem Content="По умолчанию"/>
+								<ComboBoxItem Content="По алфавиту (от А до Я)"/>
+								<ComboBoxItem Content="По алфавиту (от Я до А)"/>
+								<ComboBoxItem Content="По возрастанию ГИ"/>
+								<ComboBoxItem Content="По убыванию ГИ"/>
+							</ComboBox>
+							<TextBlock Name="CountTextBlock"
+							           VerticalAlignment="Center"/>
+				        </StackPanel>
 			        </Grid>
 		        </Panel>
 	        </TabItem>
@@ -221,6 +233,16 @@
 			        </Grid>
 		        </Panel>
 	        </TabItem>
-	    </TabControl>
+        </TabControl>
+	    <StackPanel Grid.Row="2"
+	                Grid.Column="0"
+	                Grid.ColumnSpan="2">
+		    <Button Content="Рацион"
+		            Name="RacionButton"
+		            FontSize="20"
+		            Margin="15 0 0 0"
+		            Click="RacionButton_OnClick"/>
+	    </StackPanel>
+	    
     </Grid>
 </UserControl>

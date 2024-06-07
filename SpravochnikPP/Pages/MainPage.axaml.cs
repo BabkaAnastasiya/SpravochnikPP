@@ -12,11 +12,12 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using SpravochnikPP.Context;
-using SpravochnikPP.Models;
+
 using Color = Avalonia.Media.Color;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using SpravochnikPP.Context;
+using SpravochnikPP.Models;
 using TextBox = Avalonia.Controls.TextBox;
 
 namespace SpravochnikPP.Pages;
@@ -24,11 +25,11 @@ namespace SpravochnikPP.Pages;
 public partial class MainPage : UserControl
 {
     private readonly JvtufokyContext _context;
+    private User user;
     public MainPage()
     {
         InitializeComponent();
         _context = new JvtufokyContext();
-        
         SearchTextBox = this.Find<TextBox>("SearchTextBox");
         FiltrComboBox = this.Find<ComboBox>("FiltrComboBox");
         SortComboBox = this.Find<ComboBox>("SortComboBox");
@@ -48,7 +49,40 @@ public partial class MainPage : UserControl
         LoadCategories(); 
         FillList();
     }
-    
+
+    public MainPage(User user)
+    {
+        InitializeComponent();
+        this.user = user;
+        _context = new JvtufokyContext();
+        SearchTextBox = this.Find<TextBox>("SearchTextBox");
+        FiltrComboBox = this.Find<ComboBox>("FiltrComboBox");
+        SortComboBox = this.Find<ComboBox>("SortComboBox");
+        ListBox = this.Find<ListBox>("ListBox");
+        TextDocument = this.Find<TextBlock>("TextDocument");
+        DocxDocument = this.Find<TextBlock>("DocxDocument");
+        CountTextBlock = this.Find<TextBlock>("CountTextBlock");
+        KalculButton = this.Find<Button>("KalculButton");
+        ResultTextBlock = this.Find<TextBlock>("ResultTextBlock");
+        HeightComboBox = this.Find<ComboBox>("HeightComboBox");
+        WeightComboBox = this.Find<ComboBox>("WeightComboBox");
+        AddButton = this.Find<Button>("AddButton");
+        LoadDocxDocument(@"..\..\..\Files\Текстовый документ.txt");
+        LoadTextDocument(@"..\..\..\Files\IMT.txt");
+        LoadHeight();
+        LoadWeight();
+        LoadCategories(); 
+        FillList();
+        if (this.user.Roleid == 1)
+        {
+            AddButton.IsVisible = true;
+        }
+        else
+        {
+            AddButton.IsVisible = false;
+        }
+    }
+
     private void LoadCategories()
     {
         try
@@ -92,8 +126,7 @@ public partial class MainPage : UserControl
         
         WeightComboBox.Items = weight;
     }
-
-
+    
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
@@ -142,6 +175,7 @@ public partial class MainPage : UserControl
             kbzuCard.Glikindex = VARIABLE.Glikindex;
             kbzuCard.Proteins = VARIABLE.Proteins;
             kbzuCard.Fats = VARIABLE.Fats;
+            kbzuCard.Id = VARIABLE.Id;
             if (VARIABLE.Glikindex <= 20)
             {
                 kbzuCard.Background = new SolidColorBrush(Color.FromRgb(189,236,182));
@@ -180,8 +214,6 @@ public partial class MainPage : UserControl
         }
     }
     
-   
-
     private void SearchTextBox_OnKeyUp(object? sender, KeyEventArgs e)
     {
         FillList();
@@ -257,5 +289,48 @@ public partial class MainPage : UserControl
 
     private void WeightComboBox_OnGotFocus(object? sender, GotFocusEventArgs e)
     {
+    }
+
+    private void AddButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        AddProduct addProduct = new AddProduct();
+        addProduct.Show();
+    }
+
+    private void AddRacionButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var selectedProduct = (sender as Button).Tag.ToString();
+        try
+        {
+            var a = _context.Favorites.Add(new Favorite()
+            {
+                Productid = Int32.Parse(selectedProduct),
+                Userid = this.user.Id
+            });
+            _context.SaveChanges();
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+            
+        }
+    }
+
+    private void RacionButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        try
+        {
+            var user = _context.Users.Where(x => x.Id == this.user.Id).FirstOrDefault();
+            if (user != null)
+            {
+                Racion racion = new Racion(user);
+                NavigationManager.NavigateTo(racion);
+            }
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+            
+        }
     }
 }

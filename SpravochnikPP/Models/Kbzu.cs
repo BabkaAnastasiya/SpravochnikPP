@@ -11,7 +11,7 @@ public partial class Kbzu
 
     public int? Glikindex { get; set; }
 
-    public double? Cal { get; set; }
+    public int Cal { get; set; }
 
     public double? Proteins { get; set; }
 
@@ -24,4 +24,6 @@ public partial class Kbzu
     public string? Image { get; set; }
 
     public virtual Category? Categories { get; set; }
+
+    public virtual ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
 }
